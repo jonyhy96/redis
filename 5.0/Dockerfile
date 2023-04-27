@@ -61,6 +61,7 @@ RUN set -eux; \
 	echo "$REDIS_DOWNLOAD_SHA *redis.tar.gz" | sha256sum -c -; \
 	mkdir -p /usr/src/redis; \
 	tar -xzf redis.tar.gz -C /usr/src/redis --strip-components=1; \
+	sed -i 's/--enable-cc-silence/& --with-lg-page=16 /' /usr/src/redis/deps/Makefile \
 	rm redis.tar.gz; \
 	\
 # disable Redis protected mode [1] as it is unnecessary in context of Docker
